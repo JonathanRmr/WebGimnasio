@@ -20,9 +20,18 @@ mongoose.connect(uri)
 // import routes
 
 const authRoutes = require('./routes/auth')
+const validateToken = require('./middlewares/validate-token')
+const adminRoutes = require('./routes/admin')
+
+const productRoutes = require('./routes/products');
 
 // route middlewares
 app.use('/api/user', authRoutes);
+app.use('/api/admin',validateToken, adminRoutes);
+
+app.use('/api/user', authRoutes);
+app.use('/api/admin', validateToken, adminRoutes);
+app.use('/api/products', productRoutes); // Nueva ruta para productos
 
 app.get('/', (req, res) => {
     res.json({
@@ -36,3 +45,4 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`servidor andando en: ${PORT}`)
 })
+
