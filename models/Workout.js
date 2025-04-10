@@ -15,7 +15,7 @@ const workoutSchema = new mongoose.Schema({
     required: true
   },
   duration: {
-    type: Number, // minutos
+    type: Number,
     required: true
   },
   notes: {
