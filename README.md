@@ -62,7 +62,18 @@ Visualizar progreso con gráficas (Chart.js)
 Autenticación con OAuth2.0
 Despliegue en Vercel y MongoDB Atlas
 
+📘 Documentación de la API con Swagger
 
+Esta API cuenta con documentación interactiva generada automáticamente usando Swagger UI.
+
+📍 Acceso
+Una vez el servidor esté corriendo, puedes acceder a la documentación desde:
+
+http://localhost:3001/api-docs
+📦 Instalación necesaria
+Swagger está configurado en el archivo swagger.js. Asegúrate de tener instalados estos paquetes:
+
+npm install swagger-jsdoc swagger-ui-express
 
 
 
