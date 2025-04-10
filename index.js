@@ -2,8 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 require('dotenv').config()
+const { swaggerUi, specs } = require('./swagger'); // Ajusta la ruta si está en carpeta
 
 const app = express();
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 // capturar body
 app.use(bodyparser.urlencoded({ extended: false }));
