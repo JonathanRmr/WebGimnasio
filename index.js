@@ -10,29 +10,31 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
 // Conexión a Base de datos
-
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.lgq5iiy.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = process.env.MONGO_URI;
 mongoose.connect(uri)
-.then(() => console.log('Base de datos conectada'))
-.catch(e => console.log('error db:', e))
+  .then(() => console.log('Base de datos conectada'))
+  .catch(e => console.log('error db:', e))
 
-  
 // import routes
-
-const authRoutes = require('./routes/auth')
+const authRoutes = require('./routes/auth');
+const privateRoutes = require('./routes/private');
+const workoutRoutes = require('./routes/workout');
 
 // route middlewares
 app.use('/api/user', authRoutes);
+app.use('/api/private', privateRoutes);
+app.use('/api/workout', workoutRoutes);
 
+// ruta raíz
 app.get('/', (req, res) => {
-    res.json({
-        estado: true,
-        mensaje: 'funciona!'
-    })
+  res.json({
+    estado: true,
+    mensaje: 'funciona!'
+  });
 });
 
 // iniciar server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log(`servidor andando en: ${PORT}`)
-})
+  console.log(`servidor andando en: ${PORT}`)
+});
